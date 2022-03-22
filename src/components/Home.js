@@ -5,7 +5,9 @@ function Home() {
   return (
     <div>
       <nav>
+        <Link to="/">Home</Link>
         <Link to="/spells">Spells</Link>
+        <Link to="/classes">Classes</Link>
         <Link to="/about">About</Link>
       </nav>
       <h2>Home</h2>

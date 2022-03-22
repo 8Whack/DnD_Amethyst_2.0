@@ -5,9 +5,11 @@ import Searchables from './Searchables'
 
 
 
-function Spells() {
+function Classes() {
 
-  const searchFor = "spells"
+  const searchFor = "classes"
+    
+    
     
 
 
@@ -19,11 +21,13 @@ function Spells() {
         <Link to="/classes">Classes</Link>
         <Link to="/about">About</Link>
       </nav>
-    <h2>Spells</h2>
+    <h2>Classes</h2>
     <Searchables searchFor={searchFor}/>
 
     </div>
   )
 }
 
-export default Spells
+
+
+export default Classes
