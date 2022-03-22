@@ -8,6 +8,7 @@ function Home() {
         <Link to="/">Home</Link>
         <Link to="/spells">Spells</Link>
         <Link to="/classes">Classes</Link>
+        <Link to="/monsters">Monsters</Link>
         <Link to="/about">About</Link>
       </nav>
       <h2>Home</h2>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
+import ClassSearch from './ClassSearch'
 import Searchables from './Searchables'
-import Searches from './SpellSearch'
+
 
 
 
@@ -20,12 +21,14 @@ function Classes() {
         <Link to="/">Home</Link>
         <Link to="/spells">Spells</Link>
         <Link to="/classes">Classes</Link>
+        <Link to="/monsters">Monsters</Link>
         <Link to="/about">About</Link>
       </nav>
     <h2>Classes</h2>
-    <Searches />
-    <Searchables searchFor={searchFor}/>
-
+    <div className='row'>
+      <ClassSearch searchFor={searchFor} />
+      <Searchables searchFor={searchFor}/>
+    </div>
     </div>
   )
 }

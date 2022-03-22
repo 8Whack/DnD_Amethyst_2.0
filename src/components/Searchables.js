@@ -25,7 +25,7 @@ function Searchables(props) {
           console.log(res)
       }
   return (
-    <div>
+    <div className='overflow'>
         {res.map((results)=>{
             return <p key={res.indexOf(results)}>{results}</p>
         })}

@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
+import MonsterSearch from './MonsterSearch'
 import Searchables from './Searchables'
-import Searches from './SpellSearch'
 
 
 
 
-function Spells() {
 
-  const searchFor = "spells"
+function Monsters() {
+
+  const searchFor = "monsters"
+    
+    
+    
 
 
   return (
@@ -16,18 +20,18 @@ function Spells() {
     <nav>
         <Link to="/">Home</Link>
         <Link to="/spells">Spells</Link>
-        <Link to="/classes">Classes</Link>
         <Link to="/monsters">Monsters</Link>
         <Link to="/about">About</Link>
       </nav>
-    <h2>Spells</h2>
+    <h2>Monsters</h2>
     <div className='row'>
-      <Searches searchFor={searchFor} />
+      <MonsterSearch searchFor={searchFor} />
       <Searchables searchFor={searchFor}/>
     </div>
-
     </div>
   )
 }
 
-export default Spells
+
+
+export default Monsters
