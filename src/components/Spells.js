@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import Searchables from './Searchables'
+import Searches from './SpellSearch'
 
 
 
@@ -8,7 +9,6 @@ import Searchables from './Searchables'
 function Spells() {
 
   const searchFor = "spells"
-    
 
 
   return (
@@ -20,7 +20,10 @@ function Spells() {
         <Link to="/about">About</Link>
       </nav>
     <h2>Spells</h2>
-    <Searchables searchFor={searchFor}/>
+    <div className='row'>
+      <Searches searchFor={searchFor} />
+      <Searchables searchFor={searchFor}/>
+    </div>
 
     </div>
   )

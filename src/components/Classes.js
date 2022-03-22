@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import Searchables from './Searchables'
+import Searches from './SpellSearch'
 
 
 
@@ -22,6 +23,7 @@ function Classes() {
         <Link to="/about">About</Link>
       </nav>
     <h2>Classes</h2>
+    <Searches />
     <Searchables searchFor={searchFor}/>
 
     </div>
