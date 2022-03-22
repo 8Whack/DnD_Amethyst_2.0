@@ -44,6 +44,6 @@
 }
 
 .overflow{
-  height: 75vh;
+  max-height: 75vh;
   overflow: scroll;
 }

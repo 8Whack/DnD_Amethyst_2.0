@@ -1,16 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Navigation from './Navigation'
 
 function Home() {
   return (
     <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/spells">Spells</Link>
-        <Link to="/classes">Classes</Link>
-        <Link to="/monsters">Monsters</Link>
-        <Link to="/about">About</Link>
-      </nav>
+      <Navigation />
       <h2>Home</h2>
       
           <h2>Welcome to DnD Amethyst!</h2>
