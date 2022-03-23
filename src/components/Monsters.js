@@ -1,7 +1,7 @@
 import React from 'react'
 import MonsterSearch from './MonsterSearch'
 import Navigation from './Navigation'
-import Searchables from './Searchables'
+
 
 
 
@@ -19,9 +19,9 @@ function Monsters() {
     <div>
     <Navigation />
     <h2>Monsters</h2>
-    <div className='row'>
+    <div>
       <MonsterSearch searchFor={searchFor} />
-      <Searchables searchFor={searchFor}/>
+
     </div>
     </div>
   )

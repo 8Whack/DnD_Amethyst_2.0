@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import Searchables from './Searchables'
 import { act } from 'react-dom/test-utils';
 
 function MonsterSearch(props) {
 
-    const [search, setSearch] = useState('')
+    const [monsterSearch, setMonsterSearch] = useState('')
 
     const [name, setName] = useState('');
     const [size, setSize] = useState('');
@@ -48,8 +49,8 @@ function MonsterSearch(props) {
 
 
 
-    function searchFunc() {
-        let searchWord = search.toLowerCase().replace(/[^a-z, ']/g, ' ').trim().replace(/[']/g, '').replace(/[ ]/g, '-');
+    function searchFunc(word) {
+        let searchWord = word.toLowerCase().replace(/[,'()]/g, '').replace(/[^a-z ]/g, ' ').trim().replace(/[ ]/g, '-');
         console.log(searchWord)
         axios.get(`https://api.open5e.com/${props.searchFor}/${searchWord}`).then((res)=> {
             console.log(res.data);
@@ -86,7 +87,7 @@ function MonsterSearch(props) {
             setLanguages(res.data.languages);
             setChalRating(res.data.challenge_rating);
             setActions('comeback to this, actions');
-            setReactions(res.data.reactions);
+            setReactions('come back to this, reactions');
             setLegDesc(res.data.legendary_desc);
             setLegActions('come back to this');
             setSpecAbilities('come back to this, special abilities');
@@ -95,13 +96,14 @@ function MonsterSearch(props) {
 
           
         })
-        setSearch('');
+        setMonsterSearch('');
     }
 
   return (
-    <div>
-        <input type='text' placeholder= "Search Here" onChange={e=> setSearch(e.target.value)}></input>
-        <button onClick={() => searchFunc()}>Search</button>
+    <div  className='row'>
+      <div>
+        <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
+        <button onClick={() => searchFunc(monsterSearch)}>Search</button>
         {name ? <h3>{name}</h3>: null}
         {size ? <p>{size}</p>: null}
         {type ? <p>{type}</p>: null}
@@ -141,7 +143,8 @@ function MonsterSearch(props) {
         {specAbilities ? <p>{specAbilities}</p>: null}
         {spellList ? <p>{spellList}</p>: null}
         {img ? <p>{img}</p>: null}
-
+      </div>
+        <Searchables searchFor={props.searchFor} search={searchFunc} />
     </div>
   )
 }

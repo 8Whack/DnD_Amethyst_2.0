@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import Searchables from './Searchables'
 
 function Searches(props) {
 
@@ -23,8 +24,8 @@ function Searches(props) {
     const [archetype, setArchetype] = useState('');
     const [circles, setCircles] = useState('');
 
-    function searchFunc() {
-        let searchWord = search.toLowerCase().replace(/[^a-z, ']/g, ' ').trim().replace(/[']/g, '').replace(/[ ]/g, '-');
+    function searchFunc(word) {
+        let searchWord = word.toLowerCase().replace(/[^a-z, ']/g, ' ').trim().replace(/[']/g, '').replace(/[ ]/g, '-');
         console.log(searchWord)
         axios.get(`https://api.open5e.com/${props.searchFor}/${searchWord}`).then((res)=> {
             console.log(res.data);
@@ -50,9 +51,10 @@ function Searches(props) {
     }
 
   return (
-    <div>
+    <div  className='row'>
+      <div>
         <input type='text' placeholder= "Search Here" onChange={e=> setSearch(e.target.value)}></input>
-        <button onClick={() => searchFunc()}>Search</button>
+        <button onClick={() => searchFunc(search)}>Search</button>
         {name ? <h3>{name}</h3>: null}
         {desc ? <div><h4>Description</h4><p>{desc}</p></div>: null}
         {higherLevel ? <div><h4>At Higher Levels</h4><p>{higherLevel}</p></div> : null}
@@ -69,6 +71,9 @@ function Searches(props) {
         {page ? <div><h4>Reference</h4><p>{page}</p></div>: null}
         {archetype ? <div><h4>Archetype</h4><p>{archetype}</p></div>: null}
         {circles ? <div><h4>Circles</h4><p>{circles}</p></div>: null}
+      </div>
+      <Searchables searchFor={props.searchFor} search={searchFunc} />
+
     </div>
   )
 }

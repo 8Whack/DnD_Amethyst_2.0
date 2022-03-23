@@ -1,6 +1,5 @@
 import React from 'react'
 import Navigation from './Navigation'
-import Searchables from './Searchables'
 import Searches from './SpellSearch'
 
 
@@ -15,9 +14,8 @@ function Spells() {
     <div>
     <Navigation />
     <h2>Spells</h2>
-    <div className='row'>
+    <div>
       <Searches searchFor={searchFor} />
-      <Searchables searchFor={searchFor}/>
     </div>
 
     </div>

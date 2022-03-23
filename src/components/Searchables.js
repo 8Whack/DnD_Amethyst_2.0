@@ -17,17 +17,16 @@ function Searchables(props) {
       })
       }, []);
 
-    
       const [res, setRes] = useState([])
 
 
-      const getRes= () =>{
+      const getRes = () =>{
           console.log(res)
       }
   return (
     <div className='overflow'>
         {res.map((results)=>{
-            return <p key={res.indexOf(results)}>{results}</p>
+            return <p onClick={(e)=> props.search(e.target.innerHTML)} key={res.indexOf(results)}>{results}</p>
         })}
     </div>
   )

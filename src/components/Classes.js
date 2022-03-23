@@ -1,7 +1,7 @@
 import React from 'react'
 import ClassSearch from './ClassSearch'
 import Navigation from './Navigation'
-import Searchables from './Searchables'
+
 
 
 
@@ -21,7 +21,7 @@ function Classes() {
     <h2>Classes</h2>
     <div className='row'>
       <ClassSearch searchFor={searchFor} />
-      <Searchables searchFor={searchFor}/>
+
     </div>
     </div>
   )
