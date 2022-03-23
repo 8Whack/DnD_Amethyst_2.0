@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ClassSearch from './ClassSearch'
 import Navigation from './Navigation'
 import Searchables from './Searchables'
