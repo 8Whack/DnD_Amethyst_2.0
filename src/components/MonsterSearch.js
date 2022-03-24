@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import Searchables from './Searchables'
-import { act } from 'react-dom/test-utils';
 
 function MonsterSearch(props) {
 
@@ -45,7 +44,7 @@ function MonsterSearch(props) {
     const [legActions, setLegActions] = useState('');
     const [specAbilities, setSpecAbilities] = useState('');
     const [spellList, setSpellList] = useState('');
-    const [img, setImg] = useState('');
+    const [image, setImg] = useState('');
 
 
 
@@ -63,7 +62,6 @@ function MonsterSearch(props) {
             for(let key in res.data.skills){
               skillsText.push(key + ' : ' + res.data.skills[key])
             } 
-
 
             setName(res.data.name);
             setSize(res.data.size);
@@ -97,13 +95,13 @@ function MonsterSearch(props) {
             setSenses(res.data.senses);
             setLanguages(res.data.languages);
             setChalRating(res.data.challenge_rating);
-            setActions('comeback to this, actions');
-            setReactions('come back to this, reactions');
+            setActions(res.data.actions);
+            setReactions(res.data.reactions);
             setLegDesc(res.data.legendary_desc);
-            setLegActions('come back to this');
-            setSpecAbilities('come back to this, special abilities');
-            setSpellList('come back to this, spell list');
-            setImg('come back to this, img')
+            setLegActions(res.data.legendary_actions);
+            setSpecAbilities(res.data.special_abilities);
+            setSpellList(res.data.spell_list);
+            setImg(res.data.img_main)
 
           
         })
@@ -149,13 +147,71 @@ function MonsterSearch(props) {
         {senses ? <div><h4>Senses</h4><p>{senses}</p></div>: null}
         {languages ? <div><h4>Languages</h4><p>{languages}</p></div>: null}
         {chalRating ? <div><h4>Challenge Rating</h4><p>{chalRating}</p></div>: null}
-        {actions ? <div><h4>Actions</h4><p>{actions}</p></div>: null}
-        {reactions ? <div><h4>Reactions</h4><p>{reactions}</p></div>: null}
-        {legDesc ? <div><h4>Legendary Actions</h4><p>{legDesc}</p></div>: null}
-        {legActions ? <div><h4>Legendary Actions</h4><p>{legActions}</p></div>: null}
-        {specAbilities ? <div><h4>Special Abilities</h4><p>{specAbilities}</p></div>: null}
-        {spellList ? <div><h4>Spells</h4><p>{spellList}</p></div>: null}
-        {img ? <p>{img}</p>: null}
+
+
+        {actions ? <div>
+          <h3>Actions</h3>
+          {actions.map((action, index)=>{
+              return (
+                <div>
+                  {action.name &&<h4>{action.name}</h4> }
+                  {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+                  {action.attack_bonus && <p><b>Attack Bonus:</b> {action.attack_bonus}</p>}
+                  {action.damage_dice && <p><b>Damage Dice:</b> {action.damage_dice}</p>}
+                  {action.damage_bonus && <p><b>Damage Bonus:</b> {action.damage_bonus} </p>}
+                </div>
+              )
+          })}
+          </div>: null}
+
+
+        {reactions ? <div>
+          <h4>Reactions</h4>
+          {reactions.map((action, index)=>{
+              return (
+                <div>
+                  {action.name &&<h4>{action.name}</h4> }
+                  {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+
+                </div>
+              )
+          })}
+          </div>: null}
+        {legDesc ? <div>
+          <h4>Legendary Actions</h4>
+          <p><b>Description:</b> {legDesc}</p>
+          </div>: null}
+        {legActions ? <div><h4>Legendary Actions:</h4>
+        {legActions.map((action, index)=>{
+              return (
+                <div>
+                  {action.name &&<h4>{action.name}</h4> }
+                  {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+
+                </div>
+              )
+          })}
+        </div>: null}
+        {specAbilities ? <div><h4>Special Abilities</h4>
+        {specAbilities.map((action, index)=>{
+              return (
+                <div>
+                  {action.name &&<h4>{action.name}</h4> }
+                  {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+
+                </div>
+              )
+          })}
+        </div>: null}
+        {spellList ? <div><h4>Spells</h4>
+        <ul>{spellList.map((item, index)=>{
+          return(
+            <li><a href={item} target='_blank'>{item}</a></li>
+          )
+        })}</ul>
+        
+        </div>: null}
+        {image ? <img src={image} />: null}
       </div>
         <Searchables searchFor={props.searchFor} search={searchFunc} />
     </div>
