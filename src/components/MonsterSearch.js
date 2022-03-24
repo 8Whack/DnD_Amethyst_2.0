@@ -17,7 +17,7 @@ function MonsterSearch(props) {
     const [armorDesc, setArmorDesc] = useState('');
     const [hitPoints, setHitPoints] = useState('');
     const [hitDice, setHitDice] = useState('');
-    const [speed, setSpeed] = useState();
+    const [speed, setSpeed] = useState('');
     const [str, setStr] = useState('');
     const [dex, setDex] = useState('');
     const [con, setCon] = useState('');
@@ -39,12 +39,12 @@ function MonsterSearch(props) {
     const [senses, setSenses] = useState('');
     const [languages, setLanguages] = useState('');
     const [chalRating, setChalRating] = useState('');
-    const [actions, setActions] = useState([]);
+    const [actions, setActions] = useState('');
     const [reactions, setReactions] = useState('');
     const [legDesc, setLegDesc] = useState('');
-    const [legActions, setLegActions] = useState([]);
-    const [specAbilities, setSpecAbilities] = useState([]);
-    const [spellList, setSpellList] = useState([]);
+    const [legActions, setLegActions] = useState('');
+    const [specAbilities, setSpecAbilities] = useState('');
+    const [spellList, setSpellList] = useState('');
     const [img, setImg] = useState('');
 
 
@@ -54,6 +54,17 @@ function MonsterSearch(props) {
         console.log(searchWord)
         axios.get(`https://api.open5e.com/${props.searchFor}/${searchWord}`).then((res)=> {
             console.log(res.data);
+            let speedText = []
+            for(let key in res.data.speed){
+              speedText.push(key + ' : ' + res.data.speed[key])
+            } 
+
+            let skillsText = []
+            for(let key in res.data.skills){
+              skillsText.push(key + ' : ' + res.data.skills[key])
+            } 
+
+
             setName(res.data.name);
             setSize(res.data.size);
             setType(res.data.type);
@@ -64,7 +75,7 @@ function MonsterSearch(props) {
             setArmorDesc(res.data.armor_desc);
             setHitPoints(res.data.hit_points);
             setHitDice(res.data.hit_dice);
-            setSpeed('Come Back to This, speed');
+            setSpeed(speedText);
             setStr(res.data.strength);
             setDex(res.data.dexterity);
             setCon(res.data.constitution);
@@ -78,7 +89,7 @@ function MonsterSearch(props) {
             setWisSav(res.data.wisdom_save);
             setChaSav(res.data.charisma_save);
             setPerception(res.data.perception);
-            setSkills('Come Back to this, skills');
+            setSkills(skillsText);
             setDmgVul(res.data.damage_vulnerabilities);
             setDmgRes(res.data.damage_resistances);
             setDmgImm(res.data.damage_immunities);
@@ -105,43 +116,45 @@ function MonsterSearch(props) {
         <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
         <button onClick={() => searchFunc(monsterSearch)}>Search</button>
         {name ? <h3>{name}</h3>: null}
-        {size ? <p>{size}</p>: null}
-        {type ? <p>{type}</p>: null}
-        {subtype ? <p>{name}</p>: null}
-        {group ? <p>{group}</p>: null}
-        {alignment ? <p>{alignment}</p>: null}
-        {armorClass ? <p>{armorClass}</p>: null}
-        {armorDesc ? <p>{armorDesc}</p>: null}
-        {hitPoints ? <p>{hitPoints}</p>: null}
-        {hitDice ? <p>{hitDice}</p>: null}
-        {speed ? <p>{speed}</p>: null}
-        {str ? <p>{str}</p>: null}
-        {dex ? <p>{dex}</p>: null}
-        {con ? <p>{con}</p>: null}
-        {int ? <p>{int}</p>: null}
-        {wis ? <p>{wis}</p>: null}
-        {cha ? <p>{cha}</p>: null}
-        {strSav ? <p>{strSav}</p>: null}
-        {dexSav ? <p>{dexSav}</p>: null}
-        {conSav ? <p>{conSav}</p>: null}
-        {intSav ? <p>{intSav}</p>: null}
-        {wisSav ? <p>{wisSav}</p>: null}
-        {chaSav ? <p>{chaSav}</p>: null}
-        {perception ? <p>{perception}</p>: null}
-        {skills ? <p>{skills}</p>: null}
-        {dmgVul ? <p>{dmgVul}</p>: null}
-        {dmgRes ? <p>{dmgRes}</p>: null}
-        {dmgImm ? <p>{dmgImm}</p>: null}
-        {condImm ? <p>{condImm}</p>: null}
-        {senses ? <p>{senses}</p>: null}
-        {languages ? <p>{languages}</p>: null}
-        {chalRating ? <p>{chalRating}</p>: null}
-        {actions ? <p>{actions}</p>: null}
-        {reactions ? <p>{reactions}</p>: null}
-        {legDesc ? <p>{legDesc}</p>: null}
-        {legActions ? <p>{legActions}</p>: null}
-        {specAbilities ? <p>{specAbilities}</p>: null}
-        {spellList ? <p>{spellList}</p>: null}
+        {size ? <div><h4>Size</h4><p>{size}</p></div>: null}
+        {type ? <div><h4>Type</h4><p>{type}</p></div>: null}
+        {subtype ? <div><h4>Subtype</h4><p>{subtype}</p></div>: null}
+        {group ? <div><h4>Group</h4><p>{group}</p></div>: null}
+        {alignment ? <div><h4>Alignment</h4><p>{alignment}</p></div>: null}
+        {armorClass ? <div><h4>Armor Class</h4><p>{armorClass}</p></div>: null}
+        {armorDesc ? <div><h4>Armor Description</h4><p>{armorDesc}</p></div>: null}
+        {hitPoints ? <div><h4>Hit Points</h4><p>{hitPoints}</p></div>: null}
+        {hitDice ? <div><h4>Hit Dice</h4><p>{hitDice}</p></div>: null}
+        {speed ? <div><h4>Speed</h4>{speed.map(obj => <p>{obj}</p>)}</div>: null}
+        {(str || dex || con || int || wis || cha)? <h4>Ability Scores</h4> : null }
+        {str ? <p>Str: {str}</p>: null}
+        {dex ? <p>Dex: {dex}</p>: null}
+        {con ? <p>Con: {con}</p>: null}
+        {int ? <p>Int: {int}</p>: null}
+        {wis ? <p>Wis: {wis}</p>: null}
+        {cha ? <p>Cha: {cha}</p>: null}
+        {(strSav || dexSav || conSav || intSav || wisSav || chaSav)? <h4>Saving Throws</h4> : null} 
+        {strSav ? <p>Str: {strSav}</p>: null}
+        {dexSav ? <p>Dex: {dexSav}</p>: null}
+        {conSav ? <p>Con: {conSav}</p>: null}
+        {intSav ? <p>Int: {intSav}</p>: null}
+        {wisSav ? <p>Wis: {wisSav}</p>: null}
+        {chaSav ? <p>Cha: {chaSav}</p>: null}
+        {perception ? <div><h4>Perception</h4><p>{perception}</p></div>: null}
+        {skills ? <div><h4>Skills</h4>{skills.map(obj => <p>{obj}</p>)}</div>: null}
+        {dmgVul ? <div><h4>Vulnerabilities</h4><p>{dmgVul}</p></div>: null}
+        {dmgRes ? <div><h4>Resistances</h4><p>{dmgRes}</p></div>: null}
+        {dmgImm ? <div><h4>Damage Immunities</h4><p>{dmgImm}</p></div>: null}
+        {condImm ? <div><h4>Condition Immunities</h4><p>{condImm}</p></div>: null}
+        {senses ? <div><h4>Senses</h4><p>{senses}</p></div>: null}
+        {languages ? <div><h4>Languages</h4><p>{languages}</p></div>: null}
+        {chalRating ? <div><h4>Challenge Rating</h4><p>{chalRating}</p></div>: null}
+        {actions ? <div><h4>Actions</h4><p>{actions}</p></div>: null}
+        {reactions ? <div><h4>Reactions</h4><p>{reactions}</p></div>: null}
+        {legDesc ? <div><h4>Legendary Actions</h4><p>{legDesc}</p></div>: null}
+        {legActions ? <div><h4>Legendary Actions</h4><p>{legActions}</p></div>: null}
+        {specAbilities ? <div><h4>Special Abilities</h4><p>{specAbilities}</p></div>: null}
+        {spellList ? <div><h4>Spells</h4><p>{spellList}</p></div>: null}
         {img ? <p>{img}</p>: null}
       </div>
         <Searchables searchFor={props.searchFor} search={searchFunc} />
