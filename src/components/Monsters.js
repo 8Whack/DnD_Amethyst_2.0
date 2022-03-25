@@ -21,7 +21,6 @@ function Monsters() {
     <h2>Monsters</h2>
     <div>
       <MonsterSearch searchFor={searchFor} />
-
     </div>
     </div>
   )

@@ -9,6 +9,8 @@ function Navigation() {
         <Link to="/spells">Spells</Link>
         <Link to="/classes">Classes</Link>
         <Link to="/monsters">Monsters</Link>
+        <Link to="/combat-tracker">Combat Tracker</Link>
+
         <Link to="/about">About</Link>
       </nav>
     </div>

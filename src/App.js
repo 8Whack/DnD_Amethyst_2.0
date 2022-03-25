@@ -6,6 +6,7 @@ import Spells from "./components/Spells";
 import About from "./components/About";
 import Classes from "./components/Classes";
 import Monsters from "./components/Monsters";
+import CombatTracker from "./components/CombatTracker";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='classes' element={<Classes />} /> 
         <Route path='monsters' element={<Monsters />} />
         <Route path='about' element={<About />} />
+        <Route path='combat-tracker' element={<CombatTracker/>} />
       </Routes>
 
     </div>
