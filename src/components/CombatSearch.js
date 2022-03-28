@@ -97,9 +97,9 @@ function CombatSearch(props) {
                 reactions: res.data.reactions,
                 legDesc: res.data.legendary_desc,
                 legAct: res.data.legendary_actions,
-                specAct: res.data.special_abilities,
+                specAbilities: res.data.special_abilities,
                 spells: res.data.spell_list,
-                img: res.data.img_main
+                image: res.data.img_main
             });
         })
     }
@@ -111,22 +111,105 @@ function CombatSearch(props) {
             <button onClick={() => searchFunc(monsterSearch)}>Search</button>
             
             <div>
+                {stats.image && <img src={stats.image} />}
                 {stats.name && <h3>{stats.name}</h3>}
                 <div className='row'>
                     {stats.armorClass && <p><b>AC</b> {stats.armorClass}</p>}
                     {stats.hp && <p><b>HP</b> {stats.hp}</p>}
                 </div>
-                {stats.armorDesc && <p><b>Armor Type</b> {stats.armorDesc}</p>}
+                <div>
+                    {stats.chalRat && <p><b>Challenge Rating</b> {stats.chalRat}</p>}   
+                    
+                    {stats.percep && <div><h4>Perception</h4><p>{stats.percep}</p></div>}
+                    {stats.armorDesc && <p><b>Armor Type</b> {stats.armorDesc}</p>}
+                </div>
+                
+                <div className='row'>
+                    {stats.alignment && <p><b>Alignment</b> {stats.alignment}</p>}
+                    {stats.size && <p><b>Size</b> {stats.size}</p>}
+                    {stats.type && <p><b>Type</b> {stats.type}</p>}
+                    {stats.subtype && <p><b>Subtype</b> {stats.subtype}</p>}
+
+                </div>
                 <div className='row'>
                 
-                {stats.size && <p><b>Size</b> {stats.size}</p>}
-                {stats.type && <p><b>Type</b> {stats.type}</p>}
-                {stats.subtype && <p><b>Subtype</b> {stats.subtype}</p>}
+                
                 </div>
-                <div className='row'>
-                {stats.alignment && <p><b>Alignment</b> {stats.alignment}</p>}
-                {stats.chalRat && <p><b>Challenge Rating</b> {stats.chalRat}</p>}
+
+                <div>
+                    {stats.dmgVul && <div><h4>Vulnerabilities</h4><p>{stats.dmgVul}</p></div>}
+                    {stats.dmgRes && <div><h4>Resistances</h4><p>{stats.dmgRes}</p></div>}
+                    {stats.dmgImm && <div><h4>Damage Immunities</h4><p>{stats.dmgImm}</p></div>}
+                    {stats.condImm && <div><h4>Condition Immunities</h4><p>{stats.condImm}</p></div>}
                 </div>
+                
+                {stats.actions && <div>
+                        <h3>Actions</h3>
+                        <div className='row'>
+                            {stats.actions.map((action, index)=>{
+                                return (
+                                    <div>
+                                    {action.name &&<h4>{action.name}</h4> }
+                                    {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+                                    {action.attack_bonus && <p><b>Attack Bonus:</b> {action.attack_bonus}</p>}
+                                    {action.damage_dice && <p><b>Damage Dice:</b> {action.damage_dice}</p>}
+                                    {action.damage_bonus && <p><b>Damage Bonus:</b> {action.damage_bonus} </p>}
+                                    </div>
+                                )})}
+                        </div>
+                </div>}
+
+                {stats.reactions && <div>
+                    <h3>Reactions</h3>
+                        {stats.reactions.map((action, index)=>{
+                            return (
+                                <div>
+                                {action.name &&<h4>{action.name}</h4> }
+                                {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+
+                                </div>
+                            )
+                        })}
+                </div>}
+
+                {stats.legDesc && <div>
+                    <h3>Legendary Actions</h3>
+                    <p><b>Description:</b> {stats.legDesc}</p>
+                    </div>}
+                
+                    {stats.legAct && <div><h4>Legendary Actions:</h4>
+                        {stats.legAct.map((action, index)=>{
+                        return (
+                            <div>
+                            {action.name &&<h4>{action.name}</h4> }
+                            {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+
+                            </div>
+                        )
+                    })}
+                </div>}
+
+                {stats.specAbilities && <div><h3>Special Abilities</h3>
+                    {stats.specAbilities.map((action, index)=>{
+                        return (
+                            <div>
+                            {action.name &&<h4>{action.name}</h4> }
+                            {action.desc &&<p><b>Description:</b> {action.desc}</p>}
+
+                            </div>
+                        )
+                    })}
+                </div>}
+
+                {stats.spells && <div><h4>Spells</h4>
+                    <ul>{stats.spells.map((item, index)=>{
+                    return(
+                        <li><a href={item} target='_blank'>{item}</a></li>
+                    )
+                    })}</ul>
+                    
+                    </div>}
+
                 {stats.str && 
                     <div className='row'>
                         <div>
@@ -147,8 +230,16 @@ function CombatSearch(props) {
                             {stats.wisSav && <p><b>Wis</b> {stats.wisSav}</p>}
                             {stats.chaSav && <p><b>Cha</b> {stats.chaSav}</p>}
                         </div>
+                        
 
                     </div>}
+                    <div>
+                        {stats.skills && <div><h4>Skills</h4>{stats.skills.map(obj => <p>{obj}</p>)}</div>}
+                    </div>
+                    <div>
+                        {stats.senses && <div><h4>Senses</h4><p>{stats.senses}</p></div>}
+                        {stats.languages && <div><h4>Languages</h4><p>{stats.languages}</p></div>} 
+                    </div>
             </div>
             
         </div>

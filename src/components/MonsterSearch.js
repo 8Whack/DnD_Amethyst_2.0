@@ -166,7 +166,7 @@ function MonsterSearch(props) {
 
 
         {reactions ? <div>
-          <h4>Reactions</h4>
+          <h3>Reactions</h3>
           {reactions.map((action, index)=>{
               return (
                 <div>
