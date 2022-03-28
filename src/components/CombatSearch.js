@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Searchables from './Searchables'
 import axios from 'axios';
+import CombatScorecards from './CombatScorecards';
 
 function CombatSearch(props) {
     const [monsterSearch, setMonsterSearch] = useState('');
@@ -106,6 +107,7 @@ function CombatSearch(props) {
   return (
     <div className='row'>
         <Searchables searchFor={props.searchFor} search={searchFunc} />
+        <CombatScorecards name={'placeholder for monster cards'}/>
         <div>
             <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
             <button onClick={() => searchFunc(monsterSearch)}>Search</button>
@@ -143,7 +145,7 @@ function CombatSearch(props) {
                     {stats.condImm && <div><h4>Condition Immunities</h4><p>{stats.condImm}</p></div>}
                 </div>
                 
-                {stats.actions && <div>
+                {stats.actions.name && <div>
                         <h3>Actions</h3>
                         <div className='row'>
                             {stats.actions.map((action, index)=>{
@@ -177,7 +179,7 @@ function CombatSearch(props) {
                     <p><b>Description:</b> {stats.legDesc}</p>
                     </div>}
                 
-                    {stats.legAct && <div><h4>Legendary Actions:</h4>
+                    {stats.legAct.name && <div><h4>Legendary Actions:</h4>
                         {stats.legAct.map((action, index)=>{
                         return (
                             <div>
@@ -201,7 +203,7 @@ function CombatSearch(props) {
                     })}
                 </div>}
 
-                {stats.spells && <div><h4>Spells</h4>
+                {stats.spells.length !== 0 && <div><h4>Spells:</h4>
                     <ul>{stats.spells.map((item, index)=>{
                     return(
                         <li><a href={item} target='_blank'>{item}</a></li>
@@ -234,7 +236,7 @@ function CombatSearch(props) {
 
                     </div>}
                     <div>
-                        {stats.skills && <div><h4>Skills</h4>{stats.skills.map(obj => <p>{obj}</p>)}</div>}
+                        {stats.skills.length !== 0  && <div><h4>Skills</h4>{stats.skills.map(obj => <p>{obj}</p>)}</div>}
                     </div>
                     <div>
                         {stats.senses && <div><h4>Senses</h4><p>{stats.senses}</p></div>}
