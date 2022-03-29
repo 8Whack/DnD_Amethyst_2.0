@@ -5,6 +5,11 @@ import CombatScorecards from './CombatScorecards';
 
 function CombatSearch(props) {
     const [monsterSearch, setMonsterSearch] = useState('');
+
+    const [monsterAdd, setMonsterAdd] = useState('');
+
+    const [combatList, setCombatList] = useState([]);
+
     const [stats, setStats] = useState({
         name: '',
         hp: '',
@@ -104,16 +109,43 @@ function CombatSearch(props) {
             });
         })
     }
+
+    function addToList() {
+        setCombatList([...combatList, monsterAdd ])
+    }
+
   return (
     <div className='row'>
-        <Searchables searchFor={props.searchFor} search={searchFunc} />
-        <CombatScorecards name={'placeholder for monster cards'}/>
         <div>
-            <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
+            <h2>Available Monsters</h2>
+        <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
             <button onClick={() => searchFunc(monsterSearch)}>Search</button>
-            
+            <Searchables searchFor={props.searchFor} search={searchFunc} />
+        </div>
+        
+        <div>
+            <h2>Enlist to Battle</h2>
+            <input placeholder='Add Monsters' onChange={e=> setMonsterAdd(e.target.value)}></input>
+            <button onClick={()=> {
+                addToList() 
+                setMonsterAdd('')}
+                
+                } >Enlist</button>
+            <div className='combatList'>
+        {combatList.map((enemy, index)=>{
+            return(
+                <CombatScorecards name={enemy} search={searchFunc}/>  
+            )
+        })}
+        </div>
+        </div>
+
+        
+
+        <div>
+            <h2>Monster Stats</h2>
             <div>
-                {stats.image && <img src={stats.image} />}
+                
                 {stats.name && <h3>{stats.name}</h3>}
                 <div className='row'>
                     {stats.armorClass && <p><b>AC</b> {stats.armorClass}</p>}
@@ -145,7 +177,7 @@ function CombatSearch(props) {
                     {stats.condImm && <div><h4>Condition Immunities</h4><p>{stats.condImm}</p></div>}
                 </div>
                 
-                {stats.actions.name && <div>
+                {stats.actions[0] && <div>
                         <h3>Actions</h3>
                         <div className='row'>
                             {stats.actions.map((action, index)=>{
@@ -179,7 +211,7 @@ function CombatSearch(props) {
                     <p><b>Description:</b> {stats.legDesc}</p>
                     </div>}
                 
-                    {stats.legAct.name && <div><h4>Legendary Actions:</h4>
+                    {stats.legAct[0] && <div><h4>Legendary Actions:</h4>
                         {stats.legAct.map((action, index)=>{
                         return (
                             <div>
@@ -242,6 +274,7 @@ function CombatSearch(props) {
                         {stats.senses && <div><h4>Senses</h4><p>{stats.senses}</p></div>}
                         {stats.languages && <div><h4>Languages</h4><p>{stats.languages}</p></div>} 
                     </div>
+                    {stats.image && <img src={stats.image} />}
             </div>
             
         </div>
