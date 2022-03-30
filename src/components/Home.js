@@ -13,10 +13,7 @@ function Home() {
           Use the menu on the left to navigate, and have fun! </p>
           <h3>Tools Currently Available</h3>
           <ul>
-              <li>Character Builder</li>
               <li>Spell Searching</li>
-              <li>Races</li>
-              <li>Classes</li>
               <li>Monster Manual</li>
           </ul>
     </div>
