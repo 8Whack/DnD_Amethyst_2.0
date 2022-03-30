@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Searchables from './Searchables'
 import axios from 'axios';
 import CombatScorecards from './CombatScorecards';
@@ -56,7 +56,6 @@ function CombatSearch(props) {
         let searchWord = word.toLowerCase().replace(/[,'()]/g, '').replace(/[^a-z ]/g, ' ').trim().replace(/[ ]/g, '-');
         console.log(searchWord)
         axios.get(`https://api.open5e.com/${props.searchFor}/${searchWord}`).then((res)=> {
-            console.log(res.data);
 
             let speedText = []
             for(let key in res.data.speed){
@@ -110,9 +109,38 @@ function CombatSearch(props) {
         })
     }
 
-    function addToList() {
-        setCombatList([...combatList, monsterAdd ])
+    function addToList(name) {
+        let searchWord = name.toLowerCase().replace(/[,'()]/g, '').replace(/[^a-z ]/g, ' ').trim().replace(/[ ]/g, '-');
+        console.log(searchWord)
+    axios.get(`https://api.open5e.com/monsters/${searchWord}`).then((res)=>{
+      let info = {
+        name: res.data.name,
+        AC: res.data.armor_class,
+        HP: res.data.hit_points
+      }
+      setCombatList([...combatList, info ])
+    })}
+
+    function removeFromList(index){
+         let newArray = combatList;
+         console.log(combatList[index].hp)
+        console.log(index)
+        newArray.splice(index, 1)
+        console.log(newArray)
+        setCombatList(newArray)
+        console.log(combatList)
+
     }
+
+    function modHp(index, mod){
+        if(mod === '-'){
+            combatList[index].HP -= 1;
+        } else {
+            combatList[index].HP += 1;
+        }
+    }
+
+    // let data = combatList;
 
   return (
     <div className='row'>
@@ -125,17 +153,19 @@ function CombatSearch(props) {
         
         <div>
             <h2>Enlist to Battle</h2>
-            <input placeholder='Add Monsters' onChange={e=> setMonsterAdd(e.target.value)}></input>
+            <input value={monsterAdd} placeholder='Add Monsters' onChange={e=> setMonsterAdd(e.target.value)}></input>
             <button onClick={()=> {
-                addToList() 
+                addToList(monsterAdd) 
                 setMonsterAdd('')}
-                
                 } >Enlist</button>
+
+            <button onClick={(()=>console.log(combatList))}>testing</button>
+            <button onClick={()=>console.log(combatList)}>list</button>
             <div className='combatList'>
-        {combatList.map((enemy, index)=>{
-            return(
-                <CombatScorecards name={enemy} search={searchFunc}/>  
-            )
+            {combatList.map((monster, index)=>{
+                return(
+                    <CombatScorecards key={index} info={monster} search={searchFunc} index={index} delete={removeFromList} modHp={modHp}/>  
+                )
         })}
         </div>
         </div>

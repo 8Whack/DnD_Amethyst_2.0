@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 
 function Searchables(props) {
-
+    const [res, setRes] = useState([])
     
     useEffect(()=>{
         let allRes = []
@@ -17,7 +17,7 @@ function Searchables(props) {
       })
       }, []);
 
-      const [res, setRes] = useState([])
+      
 
 
       const getRes = () =>{
