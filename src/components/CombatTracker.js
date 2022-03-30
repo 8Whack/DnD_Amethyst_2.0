@@ -7,7 +7,7 @@ function CombatTracker() {
   return (
     <div>
         <Navigation />
-        <h1>Combat tracker</h1>
+        <h1>Combat Tracker</h1>
         <CombatSearch searchFor={searchFor} />
     </div>
   )

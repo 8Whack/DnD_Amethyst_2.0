@@ -12,6 +12,10 @@ function CombatSearch(props) {
 
     const [combatList, setCombatList] = useState([]);
 
+    const [playerName, setPlayerName] = useState('');
+    const [playerHp, setPlayerHp] = useState('');
+    const [playerAc, setPlayerAc] = useState('');
+
     const [stats, setStats] = useState({
         name: '',
         hp: '',
@@ -109,7 +113,49 @@ function CombatSearch(props) {
                 spells: res.data.spell_list,
                 image: res.data.img_main
             });
-        }).catch(err=>console.log(err))
+        }).catch((err)=>{
+            console.log(err)
+            setStats({
+                name: word,
+                hp: '',
+                hitDice: '',
+                armorClass: '',
+                armorDesc: '',
+                size: '',
+                type: '',
+                subtype: '',
+                alignment: '',
+                speed: [],
+                str: '',
+                dex: '',
+                con: '',
+                int: '',
+                wis: '',
+                cha: '',
+                strSav: '',
+                dexSav: '',
+                conSav: '',
+                intSav: '',
+                wisSav: '',
+                chaSav: '',
+                percep: '',
+                skills: [],
+                dmgVul: '',
+                dmgRes: '',
+                dmgImm: '',
+                condImm: '',
+                senses: '',
+                languages: '',
+                chalRat: '',
+                actions: [],
+                reactions: '',
+                legDesc: '',
+                legAct: [],
+                specAct: [],
+                spells: [],
+                img: ''
+            })
+        })
     }
 
     function addToList(name) {
@@ -124,37 +170,41 @@ function CombatSearch(props) {
       }
       setCombatList([...combatList, info ])
     })
-    .catch(()=>{
-        let info = {
-            name: name,
-            AC: 'ask player',
-            HP: 'ask player',
-            id: Math.floor(100000 + Math.random() * 900000)
-          }
-          setCombatList([...combatList, info ])
+    .catch((err)=>{
+        alert(err + '. Did you mistype the name?')
     })
 }
 
+    function addPlayer() {
+        let info = {
+            name: playerName,
+            AC: playerAc,
+            HP: playerHp,
+            id: Math.floor(100000 + Math.random() * 900000)
+          }
+          setCombatList([...combatList, info ])
+          setPlayerName('');
+          setPlayerAc('');
+          setPlayerHp('');
+    }
+
     function removeFromList(index){
          let newArray = combatList;
-         console.log(combatList[index].hp)
-        console.log(index)
         newArray.splice(index, 1)
-        console.log(newArray)
         setCombatList(newArray)
-        console.log(combatList)
 
     }
 
     function modHp(index, mod){
+        console.log(typeof combatList[index].HP )
         if(mod === '-'){
-            combatList[index].HP -= 1;
+            combatList[index].HP = parseInt(combatList[index].HP) - 1;
         } else {
-            combatList[index].HP += 1;
+            combatList[index].HP = parseInt(combatList[index].HP) + 1;
         }
     }
 
-    const SortableItem = SortableElement(({value, i, shoe}) =>{
+    const SortableItem = SortableElement(({value, i}) =>{
 
         return (
         <CombatScorecards key={value.id} info={value} search={searchFunc} index={i} delete={removeFromList} modHp={modHp}/>)
@@ -163,8 +213,7 @@ function CombatSearch(props) {
     const SortContainer = SortableContainer(({combatArray}) => { 
 
         return (<div>{combatArray.map((value, index) => (
-            
-            <SortableItem key={value.id} i={index} index={index} value={value}  shoe={'shoe'} />
+            <SortableItem key={value.id} i={index} index={index} value={value}/>
     ))}</div>)
 
     })
@@ -191,9 +240,15 @@ function CombatSearch(props) {
                 addToList(monsterAdd) 
                 setMonsterAdd('')}
                 } >Enlist</button>
+            
+            <div>
+                <input value={playerName} type={'text'} placeholder={'Add Player Name'} onChange={(e)=>setPlayerName(e.target.value)} />
+                <input value={playerHp} type='number' placeholder='HP' onChange={(e)=>setPlayerHp(e.target.value)} /> 
+                <input value={playerAc} type='number' placeholder='AC' onChange={(e)=>setPlayerAc(e.target.value)} />
+                <button onClick={addPlayer}>Enlist</button>
+            </div>
 
-            <button onClick={(()=>console.log(combatList))}>testing</button>
-            <button onClick={()=>console.log(combatList)}>list</button>
+            <button onClick={()=>console.log(combatList)}>combat list test</button>
             <div className='combatList'>
                 <div>
                 <SortContainer distance={5} onSortEnd = {onSortEnd} combatArray={combatList}/>
