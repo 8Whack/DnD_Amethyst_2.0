@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Searchables from './Searchables'
 import axios from 'axios';
+import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import CombatScorecards from './CombatScorecards';
+import {arrayMoveImmutable} from 'array-move';
 
 function CombatSearch(props) {
     const [monsterSearch, setMonsterSearch] = useState('');
@@ -50,7 +52,8 @@ function CombatSearch(props) {
         spells: [],
         img: ''
     })
-    const enemies = [];
+
+    
 
     function searchFunc(word) {
         let searchWord = word.toLowerCase().replace(/[,'()]/g, '').replace(/[^a-z ]/g, ' ').trim().replace(/[ ]/g, '-');
@@ -106,7 +109,7 @@ function CombatSearch(props) {
                 spells: res.data.spell_list,
                 image: res.data.img_main
             });
-        })
+        }).catch(err=>console.log(err))
     }
 
     function addToList(name) {
@@ -116,10 +119,21 @@ function CombatSearch(props) {
       let info = {
         name: res.data.name,
         AC: res.data.armor_class,
-        HP: res.data.hit_points
+        HP: res.data.hit_points,
+        id: Math.floor(100000 + Math.random() * 900000)
       }
       setCombatList([...combatList, info ])
-    })}
+    })
+    .catch(()=>{
+        let info = {
+            name: name,
+            AC: 'ask player',
+            HP: 'ask player',
+            id: Math.floor(100000 + Math.random() * 900000)
+          }
+          setCombatList([...combatList, info ])
+    })
+}
 
     function removeFromList(index){
          let newArray = combatList;
@@ -140,7 +154,26 @@ function CombatSearch(props) {
         }
     }
 
-    // let data = combatList;
+    const SortableItem = SortableElement(({value, i, shoe}) =>{
+
+        return (
+        <CombatScorecards key={value.id} info={value} search={searchFunc} index={i} delete={removeFromList} modHp={modHp}/>)
+    })
+
+    const SortContainer = SortableContainer(({combatArray}) => { 
+
+        return (<div>{combatArray.map((value, index) => (
+            
+            <SortableItem key={value.id} i={index} index={index} value={value}  shoe={'shoe'} />
+    ))}</div>)
+
+    })
+
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        const arr = arrayMoveImmutable(combatList, oldIndex, newIndex)
+
+        setCombatList(arr)
+    }
 
   return (
     <div className='row'>
@@ -162,11 +195,9 @@ function CombatSearch(props) {
             <button onClick={(()=>console.log(combatList))}>testing</button>
             <button onClick={()=>console.log(combatList)}>list</button>
             <div className='combatList'>
-            {combatList.map((monster, index)=>{
-                return(
-                    <CombatScorecards key={index} info={monster} search={searchFunc} index={index} delete={removeFromList} modHp={modHp}/>  
-                )
-        })}
+                <div>
+                <SortContainer distance={5} onSortEnd = {onSortEnd} combatArray={combatList}/>
+                </div>
         </div>
         </div>
 
