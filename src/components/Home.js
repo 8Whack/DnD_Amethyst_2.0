@@ -13,8 +13,9 @@ function Home() {
           Use the menu on the left to navigate, and have fun! </p>
           <h3>Tools Currently Available</h3>
           <ul>
+              <li>Combat Tracker</li>
               <li>Spell Searching</li>
-              <li>Monster Manual</li>
+              <li>Monster Manual</li>              
           </ul>
     </div>
   )

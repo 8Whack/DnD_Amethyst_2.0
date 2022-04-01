@@ -6,6 +6,7 @@ function Navigation() {
     <div>
       <nav>
         <Link to="/">Home</Link>
+        <Link to="/signin">Sign In</Link>
         <Link to="/spells">Spells</Link>
         <Link to="/classes">Classes</Link>
         <Link to="/monsters">Monsters</Link>

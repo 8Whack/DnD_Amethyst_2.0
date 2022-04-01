@@ -7,6 +7,7 @@ import About from "./components/About";
 import Classes from "./components/Classes";
 import Monsters from "./components/Monsters";
 import CombatTracker from "./components/CombatTracker";
+import SignIn from "./components/SignIn";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='monsters' element={<Monsters />} />
         <Route path='about' element={<About />} />
         <Route path='combat-tracker' element={<CombatTracker/>} />
+        <Route path='signin' element={<SignIn />} />
       </Routes>
 
     </div>
