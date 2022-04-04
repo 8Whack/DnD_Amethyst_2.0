@@ -8,6 +8,7 @@ import Classes from "./components/Classes";
 import Monsters from "./components/Monsters";
 import CombatTracker from "./components/CombatTracker";
 import SignIn from "./components/SignIn";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='about' element={<About />} />
         <Route path='combat-tracker' element={<CombatTracker/>} />
         <Route path='signin' element={<SignIn />} />
+        <Route path='register' element={<Register />} />
       </Routes>
 
     </div>
