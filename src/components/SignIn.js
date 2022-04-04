@@ -1,7 +1,9 @@
 import React from 'react'
 import Navigation from './Navigation.js'
 import {useFormik} from 'formik';
+import * as Yup from 'yup';
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 function SignIn() {
   const initialValues = {
@@ -10,17 +12,24 @@ function SignIn() {
   }
 
   const onSubmit = (values) => {
-    console.log(values)
-  }
+    axios.post('http://localhost:4000/login', values)
+    .then((res) =>{
+      console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+    })
 
-  const validate = (values) => {
-    console.log('validation')
+    console.log(values)
   }
 
   const formik = useFormik({
     initialValues,
-    onSubmit,
-    validate
+    validationSchema: Yup.object({
+      username: Yup.string().max(75, 'Must be less than 75 Characters').required('Required'),
+      password: Yup.string().min(10, 'must be at least 10 Characters').required('Required')
+    }),
+    onSubmit
   });
 
 
@@ -39,14 +48,18 @@ function SignIn() {
               name='username'
               onChange={formik.handleChange}
               value={formik.values.username} 
+              onBlur={formik.handleBlur}
               placeholder='Input Username'></input>
+              {formik.touched.username && formik.errors.username ? (<div className='formErr'>{formik.errors.username}</div>) : null}
             Password:
             <input 
               type={'text'}
               name='password'
               onChange={formik.handleChange}
               value={formik.values.password}
+              onBlur={formik.handleBlur}
               placeholder='Input Password'></input>
+              {formik.touched.password && formik.errors.password ? (<div className='formErr'>{formik.errors.password}</div>) : null}
             <button type='submit' disabled={!formik.isValid}>Sign In</button>
         </form>
         <h3>Create an Account</h3>
