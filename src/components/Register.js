@@ -2,8 +2,10 @@ import React from 'react'
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 function Register() {
+    let navigate = useNavigate();
     const initialValues = {
         username: '',
         password: '',
@@ -17,6 +19,7 @@ function Register() {
           console.log(res.data)
           localStorage.setItem('username', res.data[0][0].username)
           localStorage.setItem('id', res.data[0][0].id)
+          navigate('/combat-tracker')
         })
         .catch(err=>console.log(err.response.data))
       }
@@ -58,7 +61,7 @@ function Register() {
               {formik.touched.email && formik.errors.email ? (<div className='formErr'>{formik.errors.email}</div>) : null}
             Password:
             <input 
-              type={'text'}
+              type='password'
               name='password'
               onChange={formik.handleChange}
               value={formik.values.password}
@@ -67,7 +70,7 @@ function Register() {
               {formik.touched.password && formik.errors.password ? (<div className='formErr'>{formik.errors.password}</div>) : null}
             Confirm Password:
             <input 
-              type={'text'}
+              type='password'
               name='confirmPassword'
               onChange={formik.handleChange}
               value={formik.values.confirmPassword}

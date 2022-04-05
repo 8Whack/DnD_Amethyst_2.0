@@ -2,10 +2,11 @@ import React from 'react'
 import Navigation from './Navigation.js'
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 function SignIn() {
+  let navigate = useNavigate();
   const initialValues = {
     username: '',
     password: ''
@@ -15,12 +16,14 @@ function SignIn() {
     axios.post('http://localhost:4000/login', values)
     .then((res) =>{
       console.log(res.data)
+      localStorage.setItem('username', res.data.username)
+      localStorage.setItem('id', res.data.id)
+
+      navigate('/combat-tracker')
     })
     .catch((err) => {
       console.log(err.response.data)
     })
-
-    console.log(values)
   }
 
   const formik = useFormik({
@@ -53,7 +56,7 @@ function SignIn() {
               {formik.touched.username && formik.errors.username ? (<div className='formErr'>{formik.errors.username}</div>) : null}
             Password:
             <input 
-              type={'text'}
+              type='password'
               name='password'
               onChange={formik.handleChange}
               value={formik.values.password}

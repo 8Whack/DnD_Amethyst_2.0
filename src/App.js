@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Routes, Route, Link} from "react-router-dom";
 import './App.css';
 import Home from "./components/Home";
@@ -11,6 +11,15 @@ import SignIn from "./components/SignIn";
 import Register from "./components/Register";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const loginUser = () => setIsLoggedIn(!isLoggedIn);
+
+  useEffect(() =>{
+    if(localStorage.getItem('user')){
+      setIsLoggedIn(true)
+    }
+  }, [])
+
   return (
     <div>
       <Routes>
