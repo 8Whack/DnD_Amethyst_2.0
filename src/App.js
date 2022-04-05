@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, createContext} from "react";
 import {Routes, Route, Link} from "react-router-dom";
 import './App.css';
 import Home from "./components/Home";
@@ -10,18 +10,20 @@ import CombatTracker from "./components/CombatTracker";
 import SignIn from "./components/SignIn";
 import Register from "./components/Register";
 
+const LoginContext = createContext();
+
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const loginUser = () => setIsLoggedIn(!isLoggedIn);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() =>{
-    if(localStorage.getItem('user')){
-      setIsLoggedIn(true)
+    if(localStorage.getItem('username')){
+      setLoggedIn(true)
     }
   }, [])
 
   return (
     <div>
+      <LoginContext.Provider value={{loggedIn,setLoggedIn}}>
       <Routes>
         <Route path='/' element = {<Home />} />
         <Route path='spells' element={<Spells />} />
@@ -32,10 +34,11 @@ function App() {
         <Route path='signin' element={<SignIn />} />
         <Route path='register' element={<Register />} />
       </Routes>
-
+      </LoginContext.Provider>
     </div>
   );
 }
 
 
 export default App;
+export {LoginContext};

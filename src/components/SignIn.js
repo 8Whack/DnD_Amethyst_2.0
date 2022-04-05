@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Navigation from './Navigation.js'
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import {LoginContext} from '../App'
 
 function SignIn() {
+  const {loggedIn, setLoggedIn} = useContext(LoginContext);
+
   let navigate = useNavigate();
   const initialValues = {
     username: '',
@@ -18,7 +21,7 @@ function SignIn() {
       console.log(res.data)
       localStorage.setItem('username', res.data.username)
       localStorage.setItem('id', res.data.id)
-
+      setLoggedIn(true);
       navigate('/combat-tracker')
     })
     .catch((err) => {
