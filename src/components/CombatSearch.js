@@ -288,13 +288,17 @@ function CombatSearch(props) {
             </div>
 
             <button onClick={()=>console.log(combatList)}>combat list test</button>
-            <input input value={combatName} type={'text'} placeholder={'Add Combat Name'} onChange={(e)=>setCombatName(e.target.value)} />
-            <button onClick= {()=>saveCombat()}>Save This Combat</button>
+            
+            {loggedIn && <div>
+                <input input value={combatName} type={'text'} placeholder={'Add Combat Name'} onChange={(e)=>setCombatName(e.target.value)} />
+                <button onClick= {()=>saveCombat()}>Save This Combat</button>
+            </div>}
+            
             <div className='combatList'>
                 <div>
                 <SortContainer distance={5} onSortEnd = {onSortEnd} combatArray={combatList}/>
                 </div>
-        </div>
+            </div>
         </div>
 
         
