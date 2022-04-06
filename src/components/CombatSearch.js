@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Searchables from './Searchables'
 import axios from 'axios';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import CombatScorecards from './CombatScorecards';
 import {arrayMoveImmutable} from 'array-move';
+import SavedCombats from './SavedCombats';
+import {LoginContext} from '../App'
 
 function CombatSearch(props) {
+    const {loggedIn} = useContext(LoginContext);
+
+    const userId = localStorage.getItem('id');
+
     const [monsterSearch, setMonsterSearch] = useState('');
 
     const [monsterAdd, setMonsterAdd] = useState('');
 
     const [combatList, setCombatList] = useState([]);
+    const [combatName, setCombatName] = useState('');
+    const [savedCombats, setSavedCombats] = useState([]);
 
     const [playerName, setPlayerName] = useState('');
     const [playerHp, setPlayerHp] = useState('');
@@ -223,6 +231,33 @@ function CombatSearch(props) {
 
         setCombatList(arr)
     }
+    
+    const saveCombat = () =>{
+        let arr = JSON.stringify(combatList)
+        console.log(arr)
+
+        let combatToSave = {
+            userid: userId,
+            name: combatName,
+            combats: arr
+        }
+        axios.post('http://localhost:4000/combats', combatToSave).then((res) =>{
+            console.log(res.data)
+            setSavedCombats(res.data)
+        })
+        .catch(err => console.log(err))
+    }
+
+    const allSavedCombats = () =>{
+        let obj = {
+            userid: userId
+        }
+        axios.post('http://localhost:4000/allSavedCombats', obj).then((res) =>{
+            console.log(res.data)
+            setSavedCombats(res.data)
+        })
+        .catch(err => console.log(err))
+    }
 
   return (
     <div className='row'>
@@ -235,6 +270,10 @@ function CombatSearch(props) {
         
         <div>
             <h2>Enlist to Battle</h2>
+            {loggedIn && <div>
+                <button onClick={()=>allSavedCombats()}>See Saved Combats</button>
+                <SavedCombats combats={savedCombats} updateCombats={setCombatList} />
+                </div>}
             <input value={monsterAdd} placeholder='Add Monsters' onChange={e=> setMonsterAdd(e.target.value)}></input>
             <button onClick={()=> {
                 addToList(monsterAdd) 
@@ -249,6 +288,8 @@ function CombatSearch(props) {
             </div>
 
             <button onClick={()=>console.log(combatList)}>combat list test</button>
+            <input input value={combatName} type={'text'} placeholder={'Add Combat Name'} onChange={(e)=>setCombatName(e.target.value)} />
+            <button onClick= {()=>saveCombat()}>Save This Combat</button>
             <div className='combatList'>
                 <div>
                 <SortContainer distance={5} onSortEnd = {onSortEnd} combatArray={combatList}/>

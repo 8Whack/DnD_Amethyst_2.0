@@ -53,5 +53,20 @@ app.post('/login', async (req, res) =>{
     }
 })
 
+app.post('/combats', async (req,res)=>{
+    const {userid, name, combats} = req.body;
+    await sequelize.query(`INSERT INTO combats (userid, name, monsters) values (${userid}, '${name}', '${combats}'); `)
+    
+    const combatsInfo = await sequelize.query(`SELECT * FROM combats WHERE userid = ${userid}`)
+    res.status(200).send(combatsInfo[0])
+})
+
+app.post('/allSavedCombats', async(req,res)=>{
+    const {userid} = req.body;
+    const combatsInfo = await sequelize.query(`SELECT * FROM combats WHERE userid = ${userid}`)
+    res.status(200).send(combatsInfo[0])
+})
+
+
 //sequelize.authenticate()
 app.listen(PORT, ()=> console.log( `server running on port ${PORT}`))
