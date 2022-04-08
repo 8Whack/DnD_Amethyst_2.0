@@ -297,18 +297,19 @@ function CombatSearch(props) {
                     <button onClick={()=> setVisibleCombats()}>Hide Saved Combats</button>
                     <SavedCombats combats={savedCombats} setCombats={setCombatList} deleteCombat={deleteCombat}/>
                 </div>}
+
                 <div className='combatList'>
                     <div className='activeCombat'>
                     <SortContainer distance={5} onSortEnd = {onSortEnd} combatArray={combatList}/>
                     </div>
                 </div>  
+            <div className='enlistThings'>
             <input value={monsterAdd} placeholder='Add Monsters' onChange={e=> setMonsterAdd(e.target.value)}></input>
             <button onClick={()=> {
                 addToList(monsterAdd) 
                 setMonsterAdd('')}
                 } >Enlist</button>
-            
-            <div>
+            <div >
                 <input value={playerName} type={'text'} placeholder={'Add Player Name'} onChange={(e)=>setPlayerName(e.target.value)} />
                 <input value={playerHp} type='number' placeholder='HP' onChange={(e)=>setPlayerHp(e.target.value)} /> 
                 <input value={playerAc} type='number' placeholder='AC' onChange={(e)=>setPlayerAc(e.target.value)} />
@@ -319,6 +320,7 @@ function CombatSearch(props) {
                 <input input value={combatName} type={'text'} placeholder={'Add Combat Name'} onChange={(e)=>setCombatName(e.target.value)} />
                 <button onClick= {()=>saveCombat()}>Save This Combat</button>
             </div>}
+            </div>
             
             </div>
         </div>

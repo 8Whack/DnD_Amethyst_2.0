@@ -63,12 +63,18 @@
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.7);
   width: 10vw ;
+  position: relative;
 }
 
 
-.activeCombat{
-    max-height: 56vh;
-    overflow: auto;
+.combatList {
+  max-height: 62vh;
+  overflow: auto;
+}
+
+.enlistThings {
+  position: absolute;
+  bottom: 15px;
 }
 
 .monsterOverflow{
