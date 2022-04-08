@@ -15,8 +15,7 @@ function Home() {
       <h3>Tools Currently Available</h3>
       <ul>
           <li>Combat Tracker</li>
-          <li>Spell Searching</li>
-          <li>Monster Manual</li>              
+          <li>Spell Searching</li>            
       </ul>
       </div>
       </div>

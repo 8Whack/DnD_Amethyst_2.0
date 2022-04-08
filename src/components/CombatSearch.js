@@ -293,7 +293,7 @@ function CombatSearch(props) {
                     }}>See Saved Combats</button>
                     </div>
                 }
-                {visibleCombats && <div>
+                {loggedIn && visibleCombats && <div>
                     <button onClick={()=> setVisibleCombats()}>Hide Saved Combats</button>
                     <SavedCombats combats={savedCombats} setCombats={setCombatList} deleteCombat={deleteCombat}/>
                 </div>}
