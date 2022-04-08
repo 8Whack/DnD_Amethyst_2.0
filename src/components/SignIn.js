@@ -45,11 +45,14 @@ function SignIn() {
 
 
   return (
-    <div>
+    <div className='signIn'>
       <Navigation />
+      <div className='center'>
+      <div className='signInInput'>
         <h2>Sign In</h2>
         <form onSubmit={formik.handleSubmit}>
-            UserName:
+          <div>
+            <b>Username: </b>
             <input 
               type='text'
               name='username'
@@ -58,7 +61,9 @@ function SignIn() {
               onBlur={formik.handleBlur}
               placeholder='Input Username'></input>
               {formik.touched.username && formik.errors.username ? (<div className='formErr'>{formik.errors.username}</div>) : null}
-            Password:
+              </div>
+          <div>
+            <b>Password: </b>
             <input 
               type='password'
               name='password'
@@ -67,10 +72,17 @@ function SignIn() {
               onBlur={formik.handleBlur}
               placeholder='Input Password'></input>
               {formik.touched.password && formik.errors.password ? (<div className='formErr'>{formik.errors.password}</div>) : null}
-            <button type='submit' disabled={!formik.isValid}>Sign In</button>
+              </div>
+              <div className='center'>
+              <button type='submit' disabled={!formik.isValid}>Sign In</button>
+              </div>
         </form>
-        <h3>Create an Account</h3>
+
+        
+        <div></div>
         <button><Link to="/register">Register Here</Link></button>
+      </div>
+      </div>
     </div>
   )
 }

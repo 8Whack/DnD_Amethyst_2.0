@@ -9,6 +9,7 @@ function Navigation() {
   const logOut = () =>{
     window.localStorage.clear();
     setLoggedIn(false)
+    window.location.reload();
   }
   return (
     <div className='navigation'>

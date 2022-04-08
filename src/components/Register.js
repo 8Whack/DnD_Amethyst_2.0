@@ -2,8 +2,10 @@ import React, {useContext} from 'react'
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import {LoginContext} from '../App'
+import Navigation from './Navigation';
+
 
 function Register() {
   const {loggedIn, setLoggedIn} = useContext(LoginContext);
@@ -42,11 +44,15 @@ function Register() {
       });
 
   return (
-    <div>
+    <div className='register'>
+      <Navigation />
+      <div className='center'>
+      <div className='signInInput'>
         <h2>Register</h2>
         <form onSubmit={formik.handleSubmit}>
-            UserName:
-            <input 
+          <div>
+            <b>UserName: </b>
+            <input className='end'
               type='text'
               name='username'
               onChange={formik.handleChange}
@@ -54,8 +60,10 @@ function Register() {
               onBlur={formik.handleBlur}
               placeholder='Input Username'></input>
               {formik.touched.username && formik.errors.username ? (<div className='formErr'>{formik.errors.username}</div>) : null}
-            Email:
-            <input 
+          </div>
+          <div>
+            <b>Email: </b>
+            <input className='end'
               type='text'
               name='email'
               onChange={formik.handleChange}
@@ -63,8 +71,10 @@ function Register() {
               onBlur={formik.handleBlur}
               placeholder='Input Email'></input>
               {formik.touched.email && formik.errors.email ? (<div className='formErr'>{formik.errors.email}</div>) : null}
-            Password:
-            <input 
+              </div>
+          <div>
+              <b>Password: </b>
+            <input className='end'
               type='password'
               name='password'
               onChange={formik.handleChange}
@@ -72,8 +82,10 @@ function Register() {
               onBlur={formik.handleBlur}
               placeholder='Input Password'></input>
               {formik.touched.password && formik.errors.password ? (<div className='formErr'>{formik.errors.password}</div>) : null}
-            Confirm Password:
-            <input 
+              </div>
+              <div>
+              <b>Confirm Password: </b>
+            <input className='end'
               type='password'
               name='confirmPassword'
               onChange={formik.handleChange}
@@ -81,8 +93,13 @@ function Register() {
               onBlur={formik.handleBlur}
               placeholder='Confirm Password'></input>
               {formik.touched.confirmPassword && formik.errors.confirmPassword ? (<div className='formErr'>{formik.errors.confirmPassword}</div>) : null}
+              </div>
+              <div className='center'>
             <button type='submit' disabled={!formik.isValid}>Register</button>
+            </div>
         </form>
+      </div>
+      </div>
     </div>
   )
 }

@@ -26,7 +26,7 @@ function CombatSearch(props) {
     const [playerAc, setPlayerAc] = useState('');
 
     const [stats, setStats] = useState({
-        name: '',
+        name: 'Monster Stats',
         hp: '',
         hitDice: '',
         armorClass: '',
@@ -326,47 +326,24 @@ function CombatSearch(props) {
         
 
         <div className='monsterStats'>
-            <h2 className='center'>Monster Stats</h2>
             <div className='overflow'>
                 
-                {stats.name && <h3>{stats.name}</h3>}
-                <div className='row'>
-                    {stats.armorClass && <p><b>AC</b> {stats.armorClass}</p>}
-                    {stats.hp && <p><b>HP</b> {stats.hp}</p>}
-                </div>
-                <div>
-                    {stats.chalRat && <p><b>Challenge Rating</b> {stats.chalRat}</p>}   
-                    
-                    {stats.percep && <div><h4>Perception</h4><p>{stats.percep}</p></div>}
-                    {stats.armorDesc && <p><b>Armor Type</b> {stats.armorDesc}</p>}
-                </div>
-                
-                <div className='row'>
-                    {stats.alignment && <p><b>Alignment</b> {stats.alignment}</p>}
-                    {stats.size && <p><b>Size</b> {stats.size}</p>}
-                    {stats.type && <p><b>Type</b> {stats.type}</p>}
-                    {stats.subtype && <p><b>Subtype</b> {stats.subtype}</p>}
+                {stats.name && <h2 className='center'>{stats.name}</h2>}
 
-                </div>
                 <div className='row'>
                 
                 
                 </div>
 
-                <div>
-                    {stats.dmgVul && <div><h4>Vulnerabilities</h4><p>{stats.dmgVul}</p></div>}
-                    {stats.dmgRes && <div><h4>Resistances</h4><p>{stats.dmgRes}</p></div>}
-                    {stats.dmgImm && <div><h4>Damage Immunities</h4><p>{stats.dmgImm}</p></div>}
-                    {stats.condImm && <div><h4>Condition Immunities</h4><p>{stats.condImm}</p></div>}
-                </div>
+                
                 
                 {stats.actions[0] && <div>
-                        <h3>Actions</h3>
-                        <div className='row'>
+                        <h2>Actions</h2>
+                        <div className='actions'>
                             {stats.actions.map((action, index)=>{
                                 return (
-                                    <div>
-                                    {action.name &&<h4>{action.name}</h4> }
+                                    <div className='border'>
+                                    {action.name &&<h3>{action.name}</h3> }
                                     {action.desc &&<p><b>Description:</b> {action.desc}</p>}
                                     {action.attack_bonus && <p><b>Attack Bonus:</b> {action.attack_bonus}</p>}
                                     {action.damage_dice && <p><b>Damage Dice:</b> {action.damage_dice}</p>}
@@ -377,28 +354,30 @@ function CombatSearch(props) {
                 </div>}
 
                 {stats.reactions && <div>
-                    <h3>Reactions</h3>
+                    <h2>Reactions</h2>
+                    <div className='actions'>
                         {stats.reactions.map((action, index)=>{
                             return (
-                                <div>
-                                {action.name &&<h4>{action.name}</h4> }
+                                <div className='border'>
+                                {action.name &&<h3>{action.name}</h3> }
                                 {action.desc &&<p><b>Description:</b> {action.desc}</p>}
 
                                 </div>
                             )
                         })}
+                    </div>
                 </div>}
 
                 {stats.legDesc && <div>
-                    <h3>Legendary Actions</h3>
-                    <p><b>Description:</b> {stats.legDesc}</p>
+                    <h2>Legendary Actions</h2>
+                    <p>{stats.legDesc}</p>
                     </div>}
                 
-                    {stats.legAct[0] && <div><h4>Legendary Actions:</h4>
+                    {stats.legAct[0] && <div className='actions'>
                         {stats.legAct.map((action, index)=>{
                         return (
-                            <div>
-                            {action.name &&<h4>{action.name}</h4> }
+                            <div className='border'>
+                            {action.name &&<h3>{action.name}</h3> }
                             {action.desc &&<p><b>Description:</b> {action.desc}</p>}
 
                             </div>
@@ -406,29 +385,44 @@ function CombatSearch(props) {
                     })}
                 </div>}
 
-                {stats.specAbilities && <div><h3>Special Abilities</h3>
+                {stats.specAbilities && <div>
+                    <h2>Special Abilities</h2>
+                    <div className='actions'>
                     {stats.specAbilities.map((action, index)=>{
                         return (
-                            <div>
-                            {action.name &&<h4>{action.name}</h4> }
+                            <div className='border'>
+                            {action.name &&<h3>{action.name}</h3> }
                             {action.desc &&<p><b>Description:</b> {action.desc}</p>}
 
                             </div>
                         )
                     })}
+                    </div>
                 </div>}
 
-                {stats.spells.length !== 0 && <div><h4>Spells:</h4>
+                {stats.dmgVul && <div className='border'>
+                    {stats.dmgVul && <div><h4>Vulnerabilities</h4><p>{stats.dmgVul}</p></div>}
+                    {stats.dmgRes && <div><h4>Resistances</h4><p>{stats.dmgRes}</p></div>}
+                    {stats.dmgImm && <div><h4>Damage Immunities</h4><p>{stats.dmgImm}</p></div>}
+                    {stats.condImm && <div><h4>Condition Immunities</h4><p>{stats.condImm}</p></div>}
+                </div>}
+
+                {stats.spells.length !== 0 && <div><h2>Spells:</h2>
                     <ul>{stats.spells.map((item, index)=>{
                     return(
-                        <li><a href={item} target='_blank'>{item}</a></li>
+                        <li><a href={item} key={index} target='_blank'>{item}</a></li>
                     )
                     })}</ul>
                     
                     </div>}
 
+                
+
+                <div className='row'>
                 {stats.str && 
-                    <div className='row'>
+                    <div className='fiftyPercent'>
+                    <h2>Abilities</h2>
+                    <div className='row border'>
                         <div>
                             <h4>Ability Scores</h4>
                             <p><b>Str</b> {stats.str}</p>
@@ -438,25 +432,43 @@ function CombatSearch(props) {
                             <p><b>Wis</b> {stats.wis}</p>
                             <p><b>Cha</b> {stats.cha}</p>
                         </div>
+
                         <div>
-                            <h4>Saving Throws</h4>
+                            {stats.strSav || stats.dexSav || stats.conSav || stats.wisSav || stats.intSav || stats.chaSav && <h4>Saving Throws</h4>}
                             {stats.strSav && <p><b>Str</b> {stats.strSav}</p>}
                             {stats.dexSav && <p><b>Dex</b> {stats.dexSav}</p>}
                             {stats.conSav && <p><b>Con</b> {stats.conSav}</p>}
                             {stats.intSav && <p><b>Int</b> {stats.intSav}</p>}
                             {stats.wisSav && <p><b>Wis</b> {stats.wisSav}</p>}
-                            {stats.chaSav && <p><b>Cha</b> {stats.chaSav}</p>}
+                            {stats.chaSav && <p><b>Cha</b> {}</p>}
                         </div>
                         
-
-                    </div>}
-                    <div>
+                        <div>
                         {stats.skills.length !== 0  && <div><h4>Skills</h4>{stats.skills.map(obj => <p>{obj}</p>)}</div>}
+                        </div>
+
                     </div>
-                    <div>
-                        {stats.senses && <div><h4>Senses</h4><p>{stats.senses}</p></div>}
-                        {stats.languages && <div><h4>Languages</h4><p>{stats.languages}</p></div>} 
-                    </div>
+                    </div>}
+
+                    {stats.chalRat &&
+                    <div className='fiftyPercent'>
+                    <h2>Other Info</h2>
+                    <div className='monsterInfo border'>
+                    {stats.chalRat && <p><b>Challenge Rating: </b> {stats.chalRat}</p>}   
+                    {stats.percep && <div><p><b>Perception: </b>{stats.percep}</p></div>}
+                    {stats.senses && <div><p><b>Senses: </b>{stats.senses}</p></div>}
+                    {stats.armorDesc && <p><b>Armor Type: </b> {stats.armorDesc}</p>}
+                    {stats.alignment && <p><b>Alignment: </b> {stats.alignment}</p>}
+                    {stats.size && <p><b>Size: </b> {stats.size}</p>}
+                    {stats.type && <p><b>Type: </b> {stats.type}</p>}
+                    {stats.subtype && <p><b>Subtype: </b> {stats.subtype}</p>}
+                    {stats.languages && <div><p><b>Languages: </b>{stats.languages}</p></div>} 
+
+                </div>
+
+                </div>}
+                </div>
+
                     {stats.image && <img src={stats.image} />}
             </div>
             

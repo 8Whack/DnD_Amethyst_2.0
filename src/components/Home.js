@@ -5,6 +5,7 @@ function Home() {
   return (
     <div className='home'>
       <Navigation />
+      <div className='center'>
       <div className='background hometext'>
       <h1>Home</h1>
       
@@ -17,6 +18,7 @@ function Home() {
           <li>Spell Searching</li>
           <li>Monster Manual</li>              
       </ul>
+      </div>
       </div>
     </div>
   )

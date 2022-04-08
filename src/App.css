@@ -1,5 +1,5 @@
 .navigation {
-  background-color: aquamarine;
+  background-color: rgba(220, 126, 244, 0.7);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -8,6 +8,7 @@
 }
 .navigation a {
   font-weight: bold;
+  color: black;
 }
 
 .nav-links{
@@ -61,7 +62,7 @@
   border: 3px wavy;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.7);
-  width: 8vw ;
+  width: 10vw ;
 }
 
 
@@ -79,6 +80,27 @@
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.7);
   width: 65vw;
+}
+
+.monsterInfo{
+  display: flex;
+  gap: 3vh 5vw;
+  justify-content: space-around;
+  align-items: space-around;
+  flex-wrap: wrap;
+  max-height: 55vh;
+  max-width: 75vw;
+}
+
+.monsterInfo div {
+  height: fit-content;
+  width: 15%;
+}
+
+.actions{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .spells{
@@ -122,6 +144,35 @@
   height: 100vh;
 }
 
+.signIn{
+  background-image: url('../DnD\ Fantasy/ocean-3605547.jpg');
+  background-size: cover;
+  height: 100vh;
+}
+
+.signInInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 8px;
+  border: 3px wavy;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  max-width: 50vw;
+  position: relative;
+}
+.signInInput div {
+  padding: 5px;
+}
+
+.register{
+  background-image: url('../DnD\ Fantasy/horse-3395135.jpg');
+  background-size: cover;
+  height: 100vh;
+}
 
 .center {
   display: flex;
@@ -133,6 +184,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.end{
+    display: flex;
+    justify-content: flex-end;
 }
 
 .overflow{
@@ -155,3 +211,6 @@
   background-color: rgba(255, 255, 255, 0.7);
 }
 
+.fiftyPercent{
+  width: 50%;
+}
