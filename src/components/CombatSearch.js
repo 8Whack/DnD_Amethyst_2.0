@@ -326,7 +326,7 @@ function CombatSearch(props) {
         
 
         <div className='monsterStats'>
-            <div className='overflow'>
+            <div className='monsterOverflow'>
                 
                 {stats.name && <h2 className='center'>{stats.name}</h2>}
 

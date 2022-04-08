@@ -1,28 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios';
-
+import React, {useContext} from 'react'
+import {LoginContext} from '../App';
 function Searchables(props) {
-    const [res, setRes] = useState([])
+    const {res} = useContext(LoginContext);
     
-    useEffect(()=>{
-        let allRes = []
-  
-        axios.get(`https://api.open5e.com/${props.searchFor}/?limit=10000`)
-      .then((res)=>{
-          console.log(res.data)
-          for(let i=0; i< res.data.results.length; i++){
-              allRes.push(res.data.results[i].name)
-          }
-          setRes(allRes)
-      })
-      }, []);
-
-      
-
-
-      const getRes = () =>{
-          console.log(res)
-      }
   return (
     <div className='overflow'>
         {res.map((results)=>{

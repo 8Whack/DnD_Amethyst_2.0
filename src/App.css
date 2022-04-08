@@ -71,6 +71,11 @@
     overflow: auto;
 }
 
+.monsterOverflow{
+  max-height: 81vh;
+  overflow: auto;
+}
+
 .monsterStats {
   padding: 5px;
   margin: 5px;

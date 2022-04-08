@@ -17,7 +17,6 @@ function Navigation() {
           <Link to="/">Home</Link>
           <Link to="/combat-tracker">Combat Tracker</Link>
           <Link to="/spells">Spells</Link>
-          <Link to="/monsters">Monsters</Link>
       </div>
 
       <div >

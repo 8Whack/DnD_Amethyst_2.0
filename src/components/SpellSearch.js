@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import Searchables from './Searchables'
+import SpellSearchables from './SpellSearchables';
+
 
 function Searches(props) {
 
@@ -82,7 +83,7 @@ function Searches(props) {
       <h2 className='center'>Available Spells</h2>
       <input type='text' placeholder= "Search Here" onChange={e=> setSearch(e.target.value)}></input>
         <button onClick={() => searchFunc(search)}>Search</button>
-      <Searchables searchFor={props.searchFor} search={searchFunc} />
+      <SpellSearchables searchFor={props.searchFor} search={searchFunc} />
       </div>
 
     </div>
