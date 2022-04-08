@@ -110,9 +110,8 @@ function MonsterSearch(props) {
 
   return (
     <div  className='row'>
-      <div>
-        <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
-        <button onClick={() => searchFunc(monsterSearch)}>Search</button>
+      <div className='border background'>
+        <h2 className='center'>Monster Stats</h2>
         {name ? <h3>{name}</h3>: null}
         {size ? <div><h4>Size</h4><p>{size}</p></div>: null}
         {type ? <div><h4>Type</h4><p>{type}</p></div>: null}
@@ -213,7 +212,12 @@ function MonsterSearch(props) {
         </div>: null}
         {image ? <img src={image} />: null}
       </div>
+      <div className='background border'>
+        <h2 className='center'>Available Monsters</h2>
+        <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
+        <button onClick={() => searchFunc(monsterSearch)}>Search</button>
         <Searchables searchFor={props.searchFor} search={searchFunc} />
+      </div>
     </div>
   )
 }

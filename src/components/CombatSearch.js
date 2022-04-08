@@ -19,6 +19,7 @@ function CombatSearch(props) {
     const [combatList, setCombatList] = useState([]);
     const [combatName, setCombatName] = useState('');
     const [savedCombats, setSavedCombats] = useState([]);
+    const [visibleCombats, setVisibleCombats] = useState(false);
 
     const [playerName, setPlayerName] = useState('');
     const [playerHp, setPlayerHp] = useState('');
@@ -259,21 +260,48 @@ function CombatSearch(props) {
         .catch(err => console.log(err))
     }
 
+    const deleteCombat = (id) =>{
+        let obj = {
+            id: id,
+            userid: userId
+        }
+
+        console.log(id);
+        axios.delete(`http://localhost:4000/allSavedCombats/${id}/${userId}`, ).then((res) =>{
+            console.log(res.data)
+            setSavedCombats(res.data)
+        })
+        .catch(err => console.log(err))
+    }
+
   return (
     <div className='row'>
-        <div>
-            <h2>Available Monsters</h2>
+        <div className='monstersearch'>
+            <h2 className='center'>Available Monsters</h2>
         <input type='text' placeholder= "Search Here" onChange={e=> setMonsterSearch(e.target.value)}></input>
             <button onClick={() => searchFunc(monsterSearch)}>Search</button>
             <Searchables searchFor={props.searchFor} search={searchFunc} />
         </div>
         
-        <div>
-            <h2>Enlist to Battle</h2>
+        <div className='enlist'>
+            <h2 className='center'>Enlist to Battle</h2>
+            <div className='overflow'>
             {loggedIn && <div>
-                <button onClick={()=>allSavedCombats()}>See Saved Combats</button>
-                <SavedCombats combats={savedCombats} updateCombats={setCombatList} />
+                <button onClick={()=>{
+                    allSavedCombats()
+                    setVisibleCombats(true)
+                    }}>See Saved Combats</button>
+                    </div>
+                }
+                {visibleCombats && <div>
+                    <button onClick={()=> setVisibleCombats()}>Hide Saved Combats</button>
+                    <SavedCombats combats={savedCombats} setCombats={setCombatList} deleteCombat={deleteCombat}/>
                 </div>}
+                <div className='combatList'>
+                    <div className='activeCombat'>
+                    <SortContainer distance={5} onSortEnd = {onSortEnd} combatArray={combatList}/>
+                    </div>
+                </div>  
             <input value={monsterAdd} placeholder='Add Monsters' onChange={e=> setMonsterAdd(e.target.value)}></input>
             <button onClick={()=> {
                 addToList(monsterAdd) 
@@ -286,26 +314,20 @@ function CombatSearch(props) {
                 <input value={playerAc} type='number' placeholder='AC' onChange={(e)=>setPlayerAc(e.target.value)} />
                 <button onClick={addPlayer}>Enlist</button>
             </div>
-
-            <button onClick={()=>console.log(combatList)}>combat list test</button>
             
             {loggedIn && <div>
                 <input input value={combatName} type={'text'} placeholder={'Add Combat Name'} onChange={(e)=>setCombatName(e.target.value)} />
                 <button onClick= {()=>saveCombat()}>Save This Combat</button>
             </div>}
             
-            <div className='combatList'>
-                <div>
-                <SortContainer distance={5} onSortEnd = {onSortEnd} combatArray={combatList}/>
-                </div>
             </div>
         </div>
 
         
 
-        <div>
-            <h2>Monster Stats</h2>
-            <div>
+        <div className='monsterStats'>
+            <h2 className='center'>Monster Stats</h2>
+            <div className='overflow'>
                 
                 {stats.name && <h3>{stats.name}</h3>}
                 <div className='row'>

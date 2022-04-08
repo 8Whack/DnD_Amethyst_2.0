@@ -11,9 +11,9 @@ function Spells() {
 
 
   return (
-    <div>
+    <div className='spells'>
     <Navigation />
-    <h2>Spells</h2>
+    <h1>Spells</h1>
     <div>
       <Searches searchFor={searchFor} />
     </div>

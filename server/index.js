@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 4000;
 const sequelize = require('./sequelize');
@@ -64,6 +63,14 @@ app.post('/combats', async (req,res)=>{
 app.post('/allSavedCombats', async(req,res)=>{
     const {userid} = req.body;
     const combatsInfo = await sequelize.query(`SELECT * FROM combats WHERE userid = ${userid}`)
+    res.status(200).send(combatsInfo[0])
+})
+
+app.delete('/allSavedCombats/:id/:userId', async(req, res)=>{
+    const {id, userId} = req.params;
+    await sequelize.query(`DELETE FROM combats WHERE id = ${id}`)
+
+    const combatsInfo = await sequelize.query(`SELECT * FROM combats WHERE userid = ${userId}`)
     res.status(200).send(combatsInfo[0])
 })
 

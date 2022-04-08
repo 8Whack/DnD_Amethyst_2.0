@@ -5,9 +5,11 @@ function SavedCombats(props) {
 
 
   return (
-    <div>
+    <div >
       {props.combats && props.combats.map((obj)=>{
-        return <p key={obj.id} onClick={()=>props.updateCombats(JSON.parse(obj.monsters))} >{obj.name}</p>
+        return <div className='row savedCombats'><p key={obj.id} onClick={()=>props.setCombats(JSON.parse(obj.monsters))} >{obj.name} <button onClick={()=>props.deleteCombat(obj.id)}>x</button></p>
+        
+        </div>
       })}
     </div>
   )

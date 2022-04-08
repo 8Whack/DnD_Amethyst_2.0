@@ -16,9 +16,9 @@ function Monsters() {
 
 
   return (
-    <div>
+    <div className='monsters'>
     <Navigation />
-    <h2>Monsters</h2>
+    <h1>Monsters</h1>
     <div>
       <MonsterSearch searchFor={searchFor} />
     </div>

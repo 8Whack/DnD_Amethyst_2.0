@@ -6,7 +6,7 @@ function Searches(props) {
 
     const [search, setSearch] = useState('')
 
-    const [name, setName] = useState('');
+    const [name, setName] = useState('Click a Spell on the right!');
     const [desc, setDesc] = useState('');
     const [higherLevel, setHigherLevel] = useState('');
     const [page, setPage] = useState('');
@@ -25,7 +25,7 @@ function Searches(props) {
     const [circles, setCircles] = useState('');
 
     function searchFunc(word) {
-        let searchWord = word.toLowerCase().replace(/[^a-z, ']/g, ' ').trim().replace(/[']/g, '').replace(/[ ]/g, '-');
+        let searchWord = word.toLowerCase().replace(/[^a-z,/ ']/g, ' ').trim().replace(/['/]/g, '').replace(/[ ]/g, '-');
         console.log(searchWord)
         axios.get(`https://api.open5e.com/${props.searchFor}/${searchWord}`).then((res)=> {
             console.log(res.data);
@@ -52,27 +52,38 @@ function Searches(props) {
 
   return (
     <div  className='row'>
-      <div>
-        <input type='text' placeholder= "Search Here" onChange={e=> setSearch(e.target.value)}></input>
-        <button onClick={() => searchFunc(search)}>Search</button>
+      <div className='spellStats'>
+        <h2 className='center'>Spell Stats</h2>
         {name ? <h3>{name}</h3>: null}
         {desc ? <div><h4>Description</h4><p>{desc}</p></div>: null}
         {higherLevel ? <div><h4>At Higher Levels</h4><p>{higherLevel}</p></div> : null}
-        {range ? <div><h4>Range</h4> <p>{range}</p></div>: null}
-        {components ? <div><h4>Components</h4><p>{components}</p></div>: null}
-        {material ? <div><h4>Materials</h4><p>{material}</p></div>: null}
-        {ritual ? <div><h4>Ritual</h4><p>{ritual}</p></div>: null}
-        {duration ? <div><h4>Duration</h4><p>{duration}</p></div>: null}
-        {concentration ? <div><h4>Concentration</h4><p>{concentration}</p></div>: null}
-        {castingTime ? <div><h4>Casting Time</h4><p>{castingTime}</p></div>: null}
-        {level ? <div><h4>Starting Level</h4><p>{level}</p></div>: null}
-        {school ? <div><h4>School</h4><p>{school}</p></div>: null}
-        {dndClass ? <div><h4>Available to</h4><p>{dndClass}</p></div>: null}
-        {page ? <div><h4>Reference</h4><p>{page}</p></div>: null}
-        {archetype ? <div><h4>Archetype</h4><p>{archetype}</p></div>: null}
-        {circles ? <div><h4>Circles</h4><p>{circles}</p></div>: null}
+        <div className='row'>
+        <div className='spellInfo'>
+          {range ? <div className='spellCard'><p><b>Range: </b>{range}</p></div>: null}
+          {components ? <div className='spellCard'><p><b>Components: </b>{components}</p></div>: null}
+          {material ? <div className='spellCard'><p><b>Materials: </b>{material}</p></div>: null}
+          {ritual ? <div className='spellCard'><p><b>Ritual: </b>{ritual}</p></div>: null}
+          {duration ? <div className='spellCard'><p><b>Duration: </b>{duration}</p></div>: null}
+          {concentration ? <div className='spellCard'><p><b>Concentration: </b>{concentration}</p></div>: null}
+
+          {castingTime ? <div className='spellCard'><p><b>Casting Time: </b>{castingTime}</p></div>: null}
+          {level ? <div className='spellCard'><p><b>Starting Level: </b>{level}</p></div>: null}
+          {school ? <div className='spellCard'><p><b>School: </b>{school}</p></div>: null}
+          {dndClass ? <div className='spellCard'><p><b>Available to: </b>{dndClass}</p></div>: null}
+          {page ? <div className='spellCard'><p><b>Reference: </b>{page}</p></div>: null}
+          {archetype ? <div className='spellCard'><p><b>Arcehtype: </b>{archetype}</p></div>: null}
+          {circles ? <div className='spellCard'><p><b>Circles: </b>{circles}</p></div>: null}
+        </div>
+        </div>
+        
       </div>
+
+      <div className='border background'>
+      <h2 className='center'>Available Spells</h2>
+      <input type='text' placeholder= "Search Here" onChange={e=> setSearch(e.target.value)}></input>
+        <button onClick={() => searchFunc(search)}>Search</button>
       <Searchables searchFor={props.searchFor} search={searchFunc} />
+      </div>
 
     </div>
   )

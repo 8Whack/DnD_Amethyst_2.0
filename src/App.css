@@ -1,40 +1,132 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navigation {
+  background-color: aquamarine;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
+  height: 10vh;
+}
+.navigation a {
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-links{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 25%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-in{
+  padding: 5px;
+  margin: 5px;
+  width: 75%;
+  align-items: center;
+}
+
+.home{
+  background-image: url('../DnD\ Fantasy/surreal-6645614.jpg');
+  background-size: cover;
+  height: 100vh;
+}
+
+.hometext {
+  width: 50vw;
+}
+
+.combat {
+  background-image: url('../DnD\ Fantasy/fantasy-4458063.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+}
+
+.monstersearch{
+  padding: 5px;
+  margin: 5px;
+  border: 3px solid;
+  border-radius: 8px;
+  border: 3px wavy;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 14vw;
+}
+
+.enlist{
+  padding: 5px;
+  margin: 5px;
+  border: 3px solid;
+  border-radius: 8px;
+  border: 3px wavy;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 8vw ;
+}
+
+
+.activeCombat{
+    max-height: 56vh;
+    overflow: auto;
+}
+
+.monsterStats {
+  padding: 5px;
+  margin: 5px;
+  border: 3px solid;
+  border-radius: 8px;
+  border: 3px wavy;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 65vw;
+}
+
+.spells{
+  background-image: url('../DnD\ Fantasy/night-3129908_1920.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+}
+
+.spellStats {
+  padding: 5px;
+  margin: 5px;
+  border: 3px solid;
+  border-radius: 8px;
+  border: 3px wavy;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 75vw;
+}
+
+.spellInfo{
+  display: flex;
+  gap: 50px 10px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-height: 55vh;
+  width: 75vw;
+}
+
+.spellCard {
+  height: fit-content;
+  width: 15%;
+}
+
+.monsters {
+  background-image: url('../DnD\ Fantasy/composing-2391033.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+}
+
+
+.center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .row {
@@ -44,6 +136,22 @@
 }
 
 .overflow{
-  max-height: 75vh;
-  overflow: scroll;
+  max-height: 74vh;
+  overflow: auto;
 }
+
+.border {
+  margin: 5px;
+  padding: 5px;
+  border: 3px solid;
+  border-radius: 8px;
+}
+
+.background{
+  margin: 5px;
+  padding: 5px;
+  border: 3px wavy;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
