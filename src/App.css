@@ -26,7 +26,7 @@
 }
 
 .home{
-  background-image: url('../DnD\ Fantasy/surreal-6645614.jpg');
+  background-image: url('../DnD-Fantasy/surreal-6645614.jpg');
   background-size: cover;
   height: 100vh;
 }
@@ -36,7 +36,7 @@
 }
 
 .combat {
-  background-image: url('../DnD\ Fantasy/fantasy-4458063.jpg');
+  background-image: url('../DnD-Fantasy/fantasy-4458063.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -115,7 +115,7 @@
 }
 
 .spells{
-  background-image: url('../DnD\ Fantasy/night-3129908_1920.jpg');
+  background-image: url('../DnD-Fantasy/night-3129908_1920.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -148,7 +148,7 @@
 }
 
 .monsters {
-  background-image: url('../DnD\ Fantasy/composing-2391033.jpg');
+  background-image: url('../DnD-Fantasy/composing-2391033.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -156,7 +156,7 @@
 }
 
 .signIn{
-  background-image: url('../DnD\ Fantasy/ocean-3605547.jpg');
+  background-image: url('../DnD-Fantasy/ocean-3605547.jpg');
   background-size: cover;
   height: 100vh;
 }
@@ -180,7 +180,7 @@
 }
 
 .register{
-  background-image: url('../DnD\ Fantasy/horse-3395135.jpg');
+  background-image: url('../DnD-Fantasy/horse-3395135.jpg');
   background-size: cover;
   height: 100vh;
 }
