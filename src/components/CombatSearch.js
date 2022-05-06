@@ -285,17 +285,19 @@ function CombatSearch(props) {
         
         <div className='enlist'>
             <h2 className='center'>Enlist to Battle</h2>
-            <div className='overflow'>
             {loggedIn && <div>
                 <button onClick={()=>{
                     allSavedCombats()
                     setVisibleCombats(true)
                     }}>See Saved Combats</button>
+                    {visibleCombats && <button onClick={()=> setVisibleCombats()}>Hide Saved Combats</button>}
                     </div>
+                    
                 }
-                {loggedIn && visibleCombats && <div>
-                    <button onClick={()=> setVisibleCombats()}>Hide Saved Combats</button>
+                {loggedIn && visibleCombats && <div className='border savedCombats'>
+                
                     <SavedCombats combats={savedCombats} setCombats={setCombatList} deleteCombat={deleteCombat}/>
+                    
                 </div>}
 
                 <div className='combatList'>
@@ -320,8 +322,6 @@ function CombatSearch(props) {
                 <input input value={combatName} type={'text'} placeholder={'Add Combat Name'} onChange={(e)=>setCombatName(e.target.value)} />
                 <button onClick= {()=>saveCombat()}>Save This Combat</button>
             </div>}
-            </div>
-            
             </div>
         </div>
 
